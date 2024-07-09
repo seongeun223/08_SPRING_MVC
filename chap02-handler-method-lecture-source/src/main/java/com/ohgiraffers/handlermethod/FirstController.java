@@ -1,7 +1,6 @@
 package com.ohgiraffers.handlermethod;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +31,8 @@ public class FirstController {
     * HttpServletRequest, HttpServletResponse / ServletRequest, ServletResponse 가능하다.
     * */
     @PostMapping("regist")
+    // Model은 주로 컨트롤러에서 뷰로 데이터를 전달할 때 사용.
+    // Model 객체를 사용하면 뷰에서 사용할 데이터를 설정할 수 있다.
     public String registMenu(Model model, WebRequest request) {
 
         String name = request.getParameter("name");
@@ -48,6 +49,8 @@ public class FirstController {
         System.out.println("message = " + message);
 
         model.addAttribute("message", message);
+        // Model 객체의 addAttribute 메소드는 뷰에 데이터를 전달하기 위해 사용된다.
+        // 이 메서드를 사용하여 데이터(속성)를 추가하면, 해당 데이터는 뷰에서 접근할 수 있다.
 
         return "first/messagePrinter";
     }
@@ -67,6 +70,9 @@ public class FirstController {
     public void modify() {}
 
     @PostMapping("modify")
+    // required 속성을 false로 설정함으로써 해당 파라미터가 필수가 아님을 지정
+    //  modifyName 파라미터가 요청에 포함되지 않더라도 오류가 발생하지 않으며,
+    //  이 경우 modifyName 변수는 null 값을 가지게 된다.
     public String modifyMenuPrice(Model model, @RequestParam(required = false) String modifyName,
                                   @RequestParam(defaultValue = "0") int modifyPrice) {
 
