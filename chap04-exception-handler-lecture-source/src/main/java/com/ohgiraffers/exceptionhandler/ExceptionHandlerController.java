@@ -41,7 +41,7 @@ public class ExceptionHandlerController {
     @ExceptionHandler(MemberRegistException.class)
     public String userExceptionHandler(Model model, MemberRegistException exception) {
 
-        System.out.println("controller 레벨의 exception 처리");
+        System.out.println("Controller 레벨의 exception 처리");
         model.addAttribute("exception", exception);
 
         return "error/memberRegist";
