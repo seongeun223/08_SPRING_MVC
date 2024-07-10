@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+</head>
+<body>
+<h1>뷰 리졸버를 이용한 뷰 연결하기</h1>
+
+<!--
+핸들러 메소드가 요청을 처리하고 논리 뷰 이름을 반환하면
+DispatcherServlet은 화면에서 데이터를 표시하도록 뷰 템플릿에 제어권을 넘긴다.
+스프링 MVC에서는 다양한 전략에 맞게 뷰를 해석할 수 있는 ViewResolver 구현체가 몇 가지 있다.
+MVC 기본 설정에서는 prefix/suffix를 이용해 뷰 이름을 특정 디렉토리에 대응시킨다.
+기본적으로 제공되는 InternalResourceViewResolve는 사용이 간단해서 좋지만
+RequestDispatcher가 forward 할 수 있는 내부 리소스만 해석이 가능하기 때문에
+다른 뷰 템플릿을 사용하는 경우에는 다른 viewResolver를 사용해야 한다.
+타임리프 또한 동일한 방식의 뷰 리졸버인 ThymeleafViewResolver를 사용한다.
+타임리프는 prefix가 "resources/templates" 이고 suffix가 ".html"이다. -->
+
+<h3>문자열로 뷰 이름 반환하기</h3>
+<button onclick="location.href=' string '">문자열로 뷰 이름 반환</button>
+
+<h3>문자열로 redirect 하기</h3>
+<button onclick="location.href=' string-redirect '">
+    문자열로 뷰 이름 반환하여 리다이렉트</button>
+
+<h3>문자열로 뷰 이름 반환하면서 flashAttribute 추가하기 </h3>
+<button onclick="location.href=' string-redirect-attr '">
+    문자열로 뷰 이름 반환하면서 flashAttribute 사용하기 </button>
+<script>
+    // 스트립트 태그 : HTML에서 자바스크립트를 사용할 수 있는 영역
+    const flashMessage1 = `[[${ flashMessage1 }]]`;
+    // 타임리프에서 해당 내용의 객체 정보를 넘겨줘서 자바스크립트에서 받을 때 사용하는 표현식
+    console.log(flashMessage1)
+
+    if(flashMessage1) {
+        alert(flashMessage1)
+    }
+</script>
+
+<h3>ModelAndView로 뷰 이름 반환하기</h3>
+<button onclick="location.href=' modelandview '">ModelAndView로 뷰 이름 반환</button>
+
+<h3>ModelAndView로 redirect 하기</h3>
+<button onclick="location.href=' modelandview-redirect '">
+    ModelAndView로 뷰 이름 반환하여 리다이렉트</button>
+
+<h3>ModelAndView로 뷰 이름 반환하면서 flashAttribute 추가하기 </h3>
+<button onclick="location.href=' modelandview-redirect-attr '">
+    ModelAndView로 뷰 이름 반환하면서 flashAttribute 사용하기 </button>
+<script>
+    // 스트립트 태그 : HTML에서 자바스크립트를 사용할 수 있는 영역
+    const flashMessage2 = `[[${ flashMessage2 }]]`;
+    // 타임리프에서 해당 내용의 객체 정보를 넘겨줘서 자바스크립트에서 받을 때 사용하는 표현식
+    console.log(flashMessage2)
+
+    if(flashMessage2) {
+        alert(flashMessage2)
+    }
+</script>
+</body>
+</html>
