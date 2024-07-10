@@ -13,7 +13,7 @@ public class InterceptorController {
         System.out.println("핸들러 메소드 호출함...");
 
         // 1초동안 기다렸다가 다음 코드 실행
-//        Thread.sleep(5000);
+        Thread.sleep(5000);
 
         return "result";
     }
