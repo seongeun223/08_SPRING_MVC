@@ -28,4 +28,13 @@ public class OtherController {
         }
         return "/";
     }
+
+    @GetMapping("other-controller-array")
+    public String otherArrayExceptionTest() {
+
+        double[] array = new double[1];
+        System.out.println(array[3]);
+
+        return "/";
+    }
 }
