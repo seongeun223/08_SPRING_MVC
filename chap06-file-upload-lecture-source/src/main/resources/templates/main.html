@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+</head>
+<body>
+<!--파일 전송 규칙
+1. post 요청으로 보낸다.
+    -바이너리파일은 문자열이 같기 때문에 Get 요청으로 보낼 경우 파일이 잘리게 된다.
+2. 요청에 파일 업로드 객체임을 알려줘야 한다.
+enctype 지정 (multipart/form-data)
+-->
+<h1>single file 업로드하기</h1>
+<form action="/single-file" method="post" enctype="multipart/form-data">
+    파일: <input type="file" name="singleFile"><br>
+    파일 설명 : <input type="text" name="singleFileDescription"><br>
+    <input type="submit">
+</form>
+</body>
+</html>
