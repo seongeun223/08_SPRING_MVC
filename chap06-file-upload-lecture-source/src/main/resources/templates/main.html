@@ -17,5 +17,12 @@ enctype 지정 (multipart/form-data)
     파일 설명 : <input type="text" name="singleFileDescription"><br>
     <input type="submit">
 </form>
+
+<h1>multi file 업로드하기</h1>
+<form action="/multi-file" method="post" enctype="multipart/form-data">
+    파일: <input type="file" name="multiFiles" multiple><br>
+    파일 설명 : <input type="text" name="multiFileDescription"><br>
+    <input type="submit">
+</form>
 </body>
 </html>
