@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>conditional</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"/>
+</head>
+<body>
+    <h1 align="center">제어문</h1>
+
+    <h2>th:if, th:unless</h2>
+    <h3>
+        this:if는 변수 표현식의 OGNL을 활용한 조건식으로 조건문을 작성하면
+        결과가 true일 때 해당 태그 범위가 처리된다.
+        th:unlesss는 표현식의 OGNL을 활용한 결과가 false일 때 해당 태그 범위가 처리된다.
+        OGNL : 객체 속성에 접근하고 조작하기 위한 언어
+    </h3>
+
+    <p th:if="${num > 0}">넘어온 값은 0보다 크다</p>
+    <p th:if="${num < 0}">넘어온 값은 0보다 작다</p>
+    <p th:unless="${num < 0}">넘어온 값은 0보다 크다</p>
+    <!-- unless는 조건이 false일 때 보인다. -->
+
+    <th:block th:if="${str == '사과'}">
+        <p>사과 좋아요!</p>
+    </th:block>
+
+    <th:block th:if="${str == '바나나'}">
+        <p>바나나 좋아요!</p>
+    </th:block>
+<!-- and나 or를 사용해서 다중 조건 처리도 가능-->
+    <p th:if="${num > 0 or num <= 10}">1부터 10까지의 양수</p>
+    <p th:if="${str != null or str == '바나나'}">바나나 좋아요!</p>
+
+    <!-- #strings라는 Utilty Objects에서 제공하는 메소드를 통해 null에 대한 처리 가능 -->
+    <p th:if="${!#strings.isEmpty(str) and str == '바나나'}">바나나 좋아요!</p>
+</body>
+</html>

@@ -16,7 +16,18 @@ public class LectureController {
         mv.addObject("member",
                 new MemberDTO("홍길동", 20, '남', "서울시 서초구"));
 
+        mv.addObject("hello", "hello!<h3>Thymeleaf</h3>");
         mv.setViewName("lecture/expression");
+        return mv;
+    }
+
+    @GetMapping("conditional")
+    public ModelAndView conditional (ModelAndView mv) {
+
+        mv.addObject("num", 1);
+        mv.addObject("str", "바나나");
+
+        mv.setViewName("/lecture/conditional");
         return mv;
     }
 }

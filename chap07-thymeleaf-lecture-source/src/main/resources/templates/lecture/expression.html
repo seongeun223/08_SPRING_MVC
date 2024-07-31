@@ -45,5 +45,108 @@
         인라인 표현식(Inline Expressions): [[...]] [(...)]
 
      -->
+
+    <!--
+        parameter로 넘어온 경우는 param
+        session attribute일 경우는 session
+        model에 담겨 온 경우는 따로 적지 않음
+    -->
+
+    <p th:text="${param.title}"></p>
+    <p th:text="${param.no[0]}"></p>
+    <p th:text="${param.no[1]}"></p>
+    <!-- 파라미터가 존재하지 않으면 무시하지 않고 에러 발생 -->
+    <!--    <p th:text="${param.no[2]}"></p>-->
+
+    <h2>표현식2 - 메시지표현식 #{...}</h2>
+    <!-- 다른 파일에 있는 것을 읽어올 때
+         외부 리소스의 데이터를 읽어올 때 사용 -->
+    <p th:text="#{message.value}"></p>
+
+    <h3>표현식3 - 링크표현식 @{...}</h3>
+    <a th:href="@{/}">메인으로</a>
+
+    <h3>표현식4 - 선택 변수 표현식 *{...}</h3>
+    <p th:text="${member.name}"></p>
+    <p th:object="${member}" th:text="*{age}"></p>
+    <p th:object="${member}" th:text="*{gender}"></p>
+
+    <div th:object="${member}">
+        <p th:text="*{address}"></p>
+    </div>
+
+    <h2>HTML 출력 th:text, th:utext, th:value</h2>
+    <h3>
+        el 태그 내부의 값으로 작성하기 위해서는 th:text 또는 th:utext를 사용할 수 있다.
+        th:text는 escape가 적용되어 태그를 단순 문자열로 처리하지만
+        th:utext는 escape가 적용되지 않아 태그를 태그로써 인식할 수 있다.
+        th:value는 태그의 value값을 지정할 수 있다.
+    </h3>
+
+    <ul>
+        <li th:text="${hello}"></li>
+        <li th:text="${hello}"></li>
+        <li><input type="text" th:value="타임리프"></li>
+    </ul>
+
+    <h2 th:inline="none">표현식5 - 인라인 표현식 [[...]], [(...)]</h2>
+    <p th:inline="none">
+        변수 표현식의 값을 html에 직접 표시하기 위해서 th:text와 같은 [[...]]를 사용하고 th:utext와 같은 [(...)]를 사용할 수 있다.
+        대괄호로 묶어 이와 같이 변수 표현식의 값을 가져오는 것을 인라인모드라고 하며 인라인 모드는 text모드와 자바스크립트 모드가 있다.
+        우리는 변수 표현식의 값을 자바스크립트에서 쓰는 것이 아닌 html에서 사용하려는 것이므로
+        th:inline="text"를 태그에 속성값으로 주고 써야 하지만 th:inline="text"를 쓰지 않아도 적용된다.
+
+        반면 인라인 모드를 적용하지 않으려면 th:inline="none"을 속성값으로 주면 변수 표현식의 값이
+        인라인모드로 사용하지 않아([[]] 또는 [()]를 인식하지 않음) 단순 문자열로 처리할 수 있다.
+
+        자바스크립트에서 사용하려면 th:inline="javascript"를 태그에 속성값으로 주고 써야 하지만
+        역시나 th:inline="javascript"를 쓰지 않아도 적용된다.
+    <p>
+    <ul>
+        <li th:inline="text">[[${hello}]]</li>
+        <li>[(${hello})]</li>
+        <li th:inline="none">[[${hello}]]</li>
+        <li th:inline="none">[(${hello})]</li>
+    </ul>
+
+    <script th:inline="javascript">
+        window.onload = function () {
+
+            /*
+            * 정적 페이지에서는 자바스크립트 문법 오류가 난다. 리터럴 형태가 아니기 때문
+            * 동적 페이지에서는 정상 동작한다. (""로 감싸서 들어옴)
+            * */
+            // let hello = [[${hello}]];
+
+            /*
+            * 정적 페이지에서는 자바스크립트 문법 오류가 발생하지 않는다. 문자열 리터럴 형태이기 때문
+            * 동적페이지에서는 에러가 발생함 ""로 감싸기 때문에 ""[[${hello}]]"" 형태가 된다.
+            * */
+            // let hello = "[[${hello}]]";
+
+            // 정적페이지 동적페이지 모두 문제가 생기지 않는다.
+            let hello = `[[${hello}]]`;
+
+            alert(hello);
+        }
+
+    </script>
+
+    <h2>리터럴 치환 ||</h2>
+    <h3>'+'를 쓰지 않고 문자열 합치기</h3>
+    <p th:object="${member}" th:text="|name = '*{name}'|"></p>
+    <p th:object="${member}" th:text="|age = '*{age}'|"></p>
+    <p th:object="${member}" th:text="|gender = '*{gender}'|"></p>
+    <p th:object="${member}" th:text="|address = '*{address}'|"></p>
+
+    <h2>th:block</h2>
+    <h3>
+        범위를 지정하고 싶을 때 사용한다.
+        th:block을 통해 해당 범위에 변수나 객체를 적용하거나
+        조건에 해당하는지에 따라 범위를 보여주거나 보여주지 않을 때 사용할 수 있다.
+    </h3>
+    <th:block th:object="${member}">
+        <p th:text="*{age}"></p>
+    </th:block>
 </body>
 </html>
