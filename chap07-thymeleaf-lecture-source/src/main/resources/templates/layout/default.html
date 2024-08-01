@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>default</title>
+    <!-- 각 페이지의 style 태그로 대체될 부분 -->
+    <style layout:fragment="style"></style>
+</head>
+<body>
+    <div id="container">
+        <header th:include="~{fragments/header :: header}"></header>
+        <section>
+            <!-- 각 페이지의 본문(Content)로 대체될 부분 -->
+            <div layout:fragment="content"></div>
+        </section>
+        <footer th:include="~{fragments/footer :: footer}"></footer>
+    </div>
+    <!-- 각 페이지의 script 태그로 대체될 부분 -->
+    <script layout:fragment="script"></script>
+</body>
+</html>

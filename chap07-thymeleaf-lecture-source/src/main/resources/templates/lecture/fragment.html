@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragment</title>
+
+    <style>
+        .header{
+            color: red;
+        }
+
+        .footer{
+            color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <!--
+    th:replace
+    해당 영역에 있는 코드를 대체하고자 하는 Fragment를 호출하여 치한하는 문법
+    기존에 정의된 블록을 지우고 불러온 Fragment로 치환한다.
+    -->
+    <header th:replace="~{/common/header :: headerFragment}">
+        <h1>나는 헤더</h1>
+    </header>
+
+    <aside th:replace="~{/common/aside :: asideFragment(${test1}, ${test2})}"></aside>
+
+    <main class="main">
+        <article>
+            <section>
+                <h1>메인!</h1>
+            </section>
+        </article>
+    </main>
+    <!--
+    th:insert
+    해당 영역에 삽입하고자 하는 Fragment를 삽입하는 문법으로
+    블록 내에 정의되어 있는 내용에 불러온 내용을 추가
+    -->
+    <footer th:insert="~{common/footer :: footerFragment}">
+        <h2>나는 footer</h2>
+    </footer>
+</body>
+</html>
