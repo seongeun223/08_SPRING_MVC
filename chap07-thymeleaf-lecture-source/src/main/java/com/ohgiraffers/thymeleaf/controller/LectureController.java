@@ -90,4 +90,10 @@ public class LectureController {
     @GetMapping("page")
     public String page() {return "page";}
 
+
+    @GetMapping("page2")
+    public String page2() {return "page2";}
+
 }
+
+
