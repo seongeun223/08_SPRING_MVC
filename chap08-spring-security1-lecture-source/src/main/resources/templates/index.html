@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <h1>Index</h1>
+    <h3>누구나 접근 가능한 웰컴페이지 입니다.</h3>
+
+    <div><a th:href="@{/board/board}">Board</a></div>
+    <div><a th:href="@{/admin/admin}">Admin</a></div>
+    <div>
+        <input type="button" value="로그인"
+               th:onclick="|location.href = '@{/auth/login}'|">
+    </div>
+    <div>
+        <form th:action="@{/auth/logout}" method="post">
+            <input type="submit" value="로그아웃">
+        </form>
+    </div>
+</body>
+</html>
