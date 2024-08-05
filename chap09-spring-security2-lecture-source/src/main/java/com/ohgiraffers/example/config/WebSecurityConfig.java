@@ -42,6 +42,8 @@ public class WebSecurityConfig {
             autorizationManagerRequsetMatcherRegistry
                     .requestMatchers("/", "index.html").permitAll() // 모두에게 허용
                     .requestMatchers("/member/register").anonymous() // 비인증사용자만 접근
+                    .requestMatchers("/post/**").authenticated()
+                    .requestMatchers("/admin/**").hasRole("ADMIN") // ROLE이 ADMIN인 경우만 접근 가능
                     .anyRequest().authenticated(); // 인증된 사용자만 요청 가능
         }));
 
@@ -55,6 +57,12 @@ public class WebSecurityConfig {
                     .defaultSuccessUrl("/") // 로그인 성공 시 이동할 url
                     .permitAll();
         }));
+
+        http.logout(logoutConfigurer -> {
+            logoutConfigurer
+                    .logoutUrl("/auth/logout")
+                    .logoutSuccessUrl("/");
+        });
 
         return http.build();
     }
