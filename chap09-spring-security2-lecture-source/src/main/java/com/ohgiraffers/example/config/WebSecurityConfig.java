@@ -41,13 +41,14 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests((autorizationManagerRequsetMatcherRegistry -> {
             autorizationManagerRequsetMatcherRegistry
                     .requestMatchers("/", "index.html").permitAll() // 모두에게 허용
-                    .requestMatchers("/member/register").anonymous(); // 비인증사용자만 접근
+                    .requestMatchers("/member/register").anonymous() // 비인증사용자만 접근
+                    .anyRequest().authenticated(); // 인증된 사용자만 요청 가능
         }));
 
         // formLogin 설정
         http.formLogin((formLoginConfigurer -> {
             formLoginConfigurer
-                    .loginPage("/auth/lohin") // 로그인 페이지(GET)
+                    .loginPage("/auth/login") // 로그인 페이지(GET)
                     .loginProcessingUrl("/auth/login") // 로그인 처리(POST)
                     .usernameParameter("memberId") // userName으로 전달할 파라미터 설정
                     .passwordParameter("password") // passWord로 전달할 파라미터 설정

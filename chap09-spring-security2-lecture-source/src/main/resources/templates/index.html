@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
@@ -8,10 +8,23 @@
     <h1> 기본화면입니다~ </h1>
     <h1> 🍕🍕 index 🍕🍕</h1>
     <div>
-        <a th:href="@{/member/register}">Register</a>
+        <!-- 로그인되지 않은 상태에서만 보이게 해줌 -->
+        <a sec:authorize="isAnonymous()" th:href="@{/member/register}">Register</a>
     </div>
     <div>
-        <a th:href="@{/auth/login}">Login</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/auth/login}">Login</a>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <h1>인증된 사용자만 보이는 태그</h1>
+    </div>
+
+    <div sec:authorize="hasRole('USER')">
+        <h1>USER 역할만 볼 수 있는 태그</h1>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <h1>ADMIN 역할만 볼 수 있는 태그</h1>
     </div>
 </body>
 </html>
