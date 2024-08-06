@@ -3,6 +3,7 @@ package com.ohgiraffers.example.auth.contorller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /*
@@ -20,4 +21,5 @@ public class AuthController {
     // 로그인 페이지로 이동
     @GetMapping("/login")
     public void login() {}
+
 }

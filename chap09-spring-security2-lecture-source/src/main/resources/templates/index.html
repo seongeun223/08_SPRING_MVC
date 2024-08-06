@@ -25,9 +25,29 @@
         </form>
     </div>
 
+    <div sec:authorize="isAuthenticated()">
+      <a th:href="@{/board/create}">Create Post</a>
+
+        <form id="searchForm">
+            <label for="boardId">게시물 ID :</label>
+            <input type="number" id="boardId" name="boardId" required>
+            <button type="button" onclick="searchBoard()">조회하기</button>
+        </form>
+    </div>
+
     <div sec:authorize="hasRole('ADMIN')">
         <a th:href="@{/admin/admin}">Admin</a>
     </div>
 
+    <script>
+        function searchBoard() {
+            const boardId = document.getElementById('boardId').value;
+            if(boardId) {
+                window.location.href = `/board/${boardId}`;
+            } else {
+                alert('게시글 ID를 입력하세요.')
+            }
+        }
+    </script>
 </body>
 </html>
